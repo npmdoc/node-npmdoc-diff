@@ -1,11 +1,13 @@
 # api documentation for  [diff (v3.2.0)](https://github.com/kpdecker/jsdiff#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-diff.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-diff) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-diff.svg)](https://travis-ci.org/npmdoc/node-npmdoc-diff)
 #### A javascript text diff implementation.
 
-[![NPM](https://nodei.co/npm/diff.png?downloads=true)](https://www.npmjs.com/package/diff)
+[![NPM](https://nodei.co/npm/diff.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/diff)
 
-[![apidoc](https://npmdoc.github.io/node-npmdoc-diff/build/screen-capture.buildNpmdoc.browser._2Fhome_2Ftravis_2Fbuild_2Fnpmdoc_2Fnode-npmdoc-diff_2Ftmp_2Fbuild_2Fapidoc.html.png)](https://npmdoc.github.io/node-npmdoc-diff/build..beta..travis-ci.org/apidoc.html)
+[![apidoc](https://npmdoc.github.io/node-npmdoc-diff/build/screenCapture.buildCi.browser.apidoc.html.png)](https://npmdoc.github.io/node-npmdoc-diff/build/apidoc.html)
 
-![package-listing](https://npmdoc.github.io/node-npmdoc-diff/build/screen-capture.npmPackageListing.svg)
+![npmPackageListing](https://npmdoc.github.io/node-npmdoc-diff/build/screenCapture.npmPackageListing.svg)
+
+![npmPackageDependencyTree](https://npmdoc.github.io/node-npmdoc-diff/build/screenCapture.npmPackageDependencyTree.svg)
 
 
 
@@ -24,8 +26,7 @@
         "auxiliaryCommentAfter": "istanbul ignore end"
     },
     "bugs": {
-        "url": "http://github.com/kpdecker/jsdiff/issues",
-        "email": "kpdecker@gmail.com"
+        "url": "http://github.com/kpdecker/jsdiff/issues"
     },
     "dependencies": {},
     "description": "A javascript text diff implementation.",
@@ -83,13 +84,11 @@
     "main": "./lib",
     "maintainers": [
         {
-            "name": "kpdecker",
-            "email": "kpdecker@gmail.com"
+            "name": "kpdecker"
         }
     ],
     "name": "diff",
     "optionalDependencies": {},
-    "readme": "ERROR: No README data found!",
     "repository": {
         "type": "git",
         "url": "git://github.com/kpdecker/jsdiff.git"
