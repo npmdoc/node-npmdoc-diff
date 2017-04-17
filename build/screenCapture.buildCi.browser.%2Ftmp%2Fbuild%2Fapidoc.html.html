@@ -1,4 +1,4 @@
-<div class="apidocDiv">
+<html><head></head><body><div class="apidocDiv">
 <style>
 /*csslint
 */
@@ -47,17 +47,10 @@
 }
 </style>
 <h1>api documentation for
-    <a
-
-        href="https://github.com/kpdecker/jsdiff#readme"
-
-    >diff (v3.2.0)</a>
+    <a href="https://github.com/kpdecker/jsdiff#readme">diff (v3.2.0)</a>
 </h1>
 <h4>A javascript text diff implementation.</h4>
-<div class="apidocSectionDiv"><a
-    href="#apidoc.tableOfContents"
-    id="apidoc.tableOfContents"
-><h1>table of contents</h1></a><ol>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.diff">module diff</a><ol>
 
@@ -789,11 +782,11 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function diff(oldString, newString) {
-<span class="apidocCodeCommentSpan">  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &#x3c;= 2 || arguments[2] === undefined ? {} : arguments
+<span class="apidocCodeCommentSpan">  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &lt;= 2 || arguments[2] === undefined ? {} : arguments
 [2];
 
   var callback = options.callback;
-  if (typeof options === &#x27;function&#x27;) {
+  if (typeof options === 'function') {
     callback = options;
     options = {};
   }
@@ -827,14 +820,14 @@
 
   // Seed editLength = 0, i.e. the content starts with the same values
   var oldPos = this.extractCommon(bestPath[0], newString, oldString, 0);
-  if (bestPath[0].newPos + 1 &#x3e;= newLen &#x26;&#x26; oldPos + 1 &#x3e;= oldLen) {
+  if (bestPath[0].newPos + 1 &gt;= newLen &amp;&amp; oldPos + 1 &gt;= oldLen) {
     // Identity per the equality and tokenizer
     return done([{ value: this.join(newString), count: newString.length }]);
   }
 
   // Main worker method. checks all permutations of a given edit length for acceptance.
   function execEditLength() {
-    for (var diagonalPath = -1 * editLength; diagonalPath &#x3c;= editLength; diagonalPath += 2) {
+    for (var diagonalPath = -1 * editLength; diagonalPath &lt;= editLength; diagonalPath += 2) {
       var basePath = /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
       var addPath = bestPath[diagonalPath - 1],
           removePath = bestPath[diagonalPath + 1],
@@ -844,9 +837,9 @@
         bestPath[diagonalPath - 1] = undefined;
       }
 
-      var canAdd = addPath &#x26;&#x26; addPath.newPos + 1 &#x3c; newLen,
-          canRemove = removePath &#x26;&#x26; 0 &#x3c;= _oldPos &#x26;&#x26; _oldPos &#x3c; oldLen;
-      if (!canAdd &#x26;&#x26; !canRemove) {
+      var canAdd = addPath &amp;&amp; addPath.newPos + 1 &lt; newLen,
+          canRemove = removePath &amp;&amp; 0 &lt;= _oldPos &amp;&amp; _oldPos &lt; oldLen;
+      if (!canAdd &amp;&amp; !canRemove) {
         // If this path is a terminal then prune
         bestPath[diagonalPath] = undefined;
         continue;
@@ -855,11 +848,11 @@
       // Select the diagonal that we want to branch from. We select the prior
       // path whose position in the new string is the farthest from the origin
       // and does not pass the bounds of the diff graph
-      if (!canAdd || canRemove &#x26;&#x26; addPath.newPos &#x3c; removePath.newPos) {
+      if (!canAdd || canRemove &amp;&amp; addPath.newPos &lt; removePath.newPos) {
         basePath = clonePath(removePath);
         self.pushComponent(basePath.components, undefined, true);
       } else {
-        basePath = addPath; // No need to clone, we&#x27;ve pulled it from the list
+        basePath = addPath; // No need to clone, we've pulled it from the list
         basePath.newPos++;
         self.pushComponent(basePath.components, true, undefined);
       }
@@ -867,7 +860,7 @@
       _oldPos = self.extractCommon(basePath, newString, oldString, diagonalPath);
 
       // If we have hit the end of both strings, then we are done
-      if (basePath.newPos + 1 &#x3e;= newLen &#x26;&#x26; _oldPos + 1 &#x3e;= oldLen) {
+      if (basePath.newPos + 1 &gt;= newLen &amp;&amp; _oldPos + 1 &gt;= oldLen) {
         return done(buildValues(self, basePath.components, newString, oldString, self.useLongestToken));
       } else {
         // Otherwise track this path as a potential candidate and continue.
@@ -886,7 +879,7 @@
       setTimeout(function () {
         // This should not happen, but we want to be safe.
         /* istanbul ignore next */
-</span>        if (editLength &#x3e; maxEditLength) {
+</span>        if (editLength &gt; maxEditLength) {
           return callback();
         }
 
@@ -896,7 +889,7 @@
       }, 0);
     })();
   } else {
-    while (editLength &#x3c;= maxEditLength) {
+    while (editLength &lt;= maxEditLength) {
       var ret = execEditLength();
       if (ret) {
         return ret;
@@ -937,7 +930,7 @@
       newPos = basePath.newPos,
       oldPos = newPos - diagonalPath,
       commonCount = 0;
-  while (newPos + 1 &#x3c; newLen &#x26;&#x26; oldPos + 1 &#x3c; oldLen &#x26;&#x26; this.equals(newString[newPos + 1], oldString[oldPos + 1])) {
+  while (newPos + 1 &lt; newLen &amp;&amp; oldPos + 1 &lt; oldLen &amp;&amp; this.equals(newString[newPos + 1], oldString[oldPos + 1])) {
     newPos++;
     oldPos++;
     commonCount++;
@@ -963,7 +956,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function join(chars) {
-  return chars.join(&#x27;&#x27;);
+  return chars.join('');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -979,7 +972,7 @@
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function pushComponent(components, added, removed) {
   var last = components[components.length - 1];
-  if (last &#x26;&#x26; last.added === added &#x26;&#x26; last.removed === removed) {
+  if (last &amp;&amp; last.added === added &amp;&amp; last.removed === removed) {
     // We need to clone here as the component clone operation is just
     // as shallow array clone
     components[components.length - 1] = { count: last.count + 1, added: added, removed: removed };
@@ -1001,7 +994,7 @@
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function removeEmpty(array) {
   var ret = [];
-  for (var i = 0; i &#x3c; array.length; i++) {
+  for (var i = 0; i &lt; array.length; i++) {
     if (array[i]) {
       ret.push(array[i]);
     }
@@ -1021,7 +1014,7 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function tokenize(value) {
-  return value.split(&#x27;&#x27;);
+  return value.split('');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1036,16 +1029,16 @@
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function applyPatch(source, uniDiff) {
-<span class="apidocCodeCommentSpan">  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &#x3c;= 2 || arguments[2] === undefined ? {} : arguments
+<span class="apidocCodeCommentSpan">  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &lt;= 2 || arguments[2] === undefined ? {} : arguments
 [2];
 
-  if (typeof uniDiff === &#x27;string&#x27;) {
+  if (typeof uniDiff === 'string') {
     uniDiff = /*istanbul ignore start*/(0, _parse.parsePatch) /*istanbul ignore end*/(uniDiff);
   }
 
   if (Array.isArray(uniDiff)) {
-    if (uniDiff.length &#x3e; 1) {
-      throw new Error(&#x27;applyPatch only works with a single input.&#x27;);
+    if (uniDiff.length &gt; 1) {
+      throw new Error('applyPatch only works with a single input.');
     }
 
     uniDiff = uniDiff[0];
@@ -1070,17 +1063,17 @@
    * Checks if the hunk exactly fits on the provided location
    */
 </span>  function hunkFits(hunk, toPos) {
-    for (var j = 0; j &#x3c; hunk.lines.length; j++) {
+    for (var j = 0; j &lt; hunk.lines.length; j++) {
       var line = hunk.lines[j],
           operation = line[0],
           content = line.substr(1);
 
-      if (operation === &#x27; &#x27; || operation === &#x27;-&#x27;) {
+      if (operation === ' ' || operation === '-') {
         // Context sanity check
         if (!compareLine(toPos + 1, lines[toPos], operation, content)) {
           errorCount++;
 
-          if (errorCount &#x3e; fuzzFactor) {
+          if (errorCount &gt; fuzzFactor) {
             return false;
           }
         }
@@ -1092,13 +1085,13 @@
   }
 
   // Search best fit offsets for each hunk based on the previous ones
-  for (var i = 0; i &#x3c; hunks.length; i++) {
+  for (var i = 0; i &lt; hunks.length; i++) {
     var hunk = hunks[i],
         maxLine = lines.length - hunk.oldLines,
         localOffset = 0,
         toPos = offset + hunk.oldStart - 1;
 
-    var iterator = /*istanbul ignore start*/(0, _distanceIterator2[&#x27;default&#x27;]) /*istanbul ignore end*/(toPos, minLine, maxLine);
+    var iterator = /*istanbul ignore start*/(0, _distanceIterator2['default']) /*istanbul ignore end*/(toPos, minLine, maxLine);
 
     for (; localOffset !== undefined; localOffset = iterator()) {
       if (hunkFits(hunk, toPos + localOffset)) {
@@ -1111,40 +1104,40 @@
       return false;
     }
 
-    // Set lower text limit to end of the current hunk, so next ones don&#x27;t try
+    // Set lower text limit to end of the current hunk, so next ones don't try
     // to fit over already patched text
     minLine = hunk.offset + hunk.oldStart + hunk.oldLines;
   }
 
   // Apply patch hunks
-  for (var _i = 0; _i &#x3c; hunks.length; _i++) {
+  for (var _i = 0; _i &lt; hunks.length; _i++) {
     var _hunk = hunks[_i],
         _toPos = _hunk.offset + _hunk.newStart - 1;
     if (_hunk.newLines == 0) {
       _toPos++;
     }
 
-    for (var j = 0; j &#x3c; _hunk.lines.length; j++) {
+    for (var j = 0; j &lt; _hunk.lines.length; j++) {
       var line = _hunk.lines[j],
           operation = line[0],
           content = line.substr(1),
           delimiter = _hunk.linedelimiters[j];
 
-      if (operation === &#x27; &#x27;) {
+      if (operation === ' ') {
         _toPos++;
-      } else if (operation === &#x27;-&#x27;) {
+      } else if (operation === '-') {
         lines.splice(_toPos, 1);
         delimiters.splice(_toPos, 1);
         /* istanbul ignore else */
-      } else if (operation === &#x27;+&#x27;) {
+      } else if (operation === '+') {
           lines.splice(_toPos, 0, content);
           delimiters.splice(_toPos, 0, delimiter);
           _toPos++;
-        } else if (operation === &#x27;\\&#x27;) {
+        } else if (operation === '\\') {
           var previousOperation = _hunk.lines[j - 1] ? _hunk.lines[j - 1][0] : null;
-          if (previousOperation === &#x27;+&#x27;) {
+          if (previousOperation === '+') {
             removeEOFNL = true;
-          } else if (previousOperation === &#x27;-&#x27;) {
+          } else if (previousOperation === '-') {
             addEOFNL = true;
           }
         }
@@ -1158,18 +1151,18 @@
       delimiters.pop();
     }
   } else if (addEOFNL) {
-    lines.push(&#x27;&#x27;);
-    delimiters.push(&#x27;\n&#x27;);
+    lines.push('');
+    delimiters.push('\n');
   }
-  for (var _k = 0; _k &#x3c; lines.length - 1; _k++) {
+  for (var _k = 0; _k &lt; lines.length - 1; _k++) {
     lines[_k] = lines[_k] + delimiters[_k];
   }
-  return lines.join(&#x27;&#x27;);
+  return lines.join('');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   hunks: [{
     oldStart: 1, oldLines: 3, newStart: 1, newLines: 3,
-    lines: [&#x27; line2&#x27;, &#x27; line3&#x27;, &#x27;-line4&#x27;, &#x27;+line5&#x27;, &#x27;\\ No newline at end of file&#
+    lines: [' line2', ' line3', '-line4', '+line5', '\\ No newline at end of file&amp;#
 x27;],
   }]
 }
@@ -1199,7 +1192,7 @@ be considered equal when patching. Defaults to strict equality but may be overri
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function applyPatches(uniDiff, options) {
-  if (typeof uniDiff === &#x27;string&#x27;) {
+  if (typeof uniDiff === 'string') {
     uniDiff = /*istanbul ignore start*/(0, _parse.parsePatch) /*istanbul ignore end*/(uniDiff);
   }
 
@@ -1246,7 +1239,7 @@ patch index is:
 - `options.loadFile(index, callback)` is called. The caller should then load the contents of the file and then pass that to the `
 callback(err, data)` callback. Passing an `err` will terminate further patch execution.
 - `options.patched(index, content, callback)` is called once the patch has been applied. `content` will be the return value from
- `applyPatch`. When it&#x27;s ready, the caller should call `callback(err)` callback. Passing an `err` will terminate further patch
+ `applyPatch`. When it's ready, the caller should call `callback(err)` callback. Passing an `err` will terminate further patch
  execution.
 
 Once all patches have been applied or an error occurs, the `options.complete(err)` callback is made.
@@ -1268,7 +1261,7 @@ Once all patches have been applied or an error occurs, the `options.complete(err
 
   var i =<span class="apidocCodeCommentSpan"> /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
 
-  for (i = 0; i &#x3c; stack.length; i += 1) {
+  for (i = 0; i &lt; stack.length; i += 1) {
     if (stack[i] === obj) {
       return replacementStack[i];
     }
@@ -1276,11 +1269,11 @@ Once all patches have been applied or an error occurs, the `options.complete(err
 
   var canonicalizedObj = /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
 
-  if (&#x27;[object Array]&#x27; === objectPrototypeToString.call(obj)) {
+  if ('[object Array]' === objectPrototypeToString.call(obj)) {
     stack.push(obj);
     canonicalizedObj = new Array(obj.length);
     replacementStack.push(canonicalizedObj);
-    for (i = 0; i &#x3c; obj.length; i += 1) {
+    for (i = 0; i &lt; obj.length; i += 1) {
       canonicalizedObj[i] = canonicalize(obj[i], stack, replacementStack);
     }
     stack.pop();
@@ -1288,11 +1281,11 @@ Once all patches have been applied or an error occurs, the `options.complete(err
     return canonicalizedObj;
   }
 
-  if (obj &#x26;&#x26; obj.toJSON) {
+  if (obj &amp;&amp; obj.toJSON) {
     obj = obj.toJSON();
   }
 
-  if ( /*istanbul ignore start*/(typeof /*istanbul ignore end*/obj === &#x27;undefined&#x27; ? &#x27;undefined&#x27; : _typeof(obj)) === &#x27;object&#x27; &#x26;&#x26;
+  if ( /*istanbul ignore start*/(typeof /*istanbul ignore end*/obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object' &amp;&amp;
 obj !== null) {
     stack.push(obj);
     canonicalizedObj = {};
@@ -1306,7 +1299,7 @@ obj !== null) {
       }
     }
     sortedKeys.sort();
-    for (i = 0; i &#x3c; sortedKeys.length; i += 1) {
+    for (i = 0; i &lt; sortedKeys.length; i += 1) {
       key = sortedKeys[i];
       canonicalizedObj[key] = canonicalize(obj[key], stack, replacementStack);
     }
@@ -1333,7 +1326,7 @@ obj !== null) {
   var ret = [],
       change = /*istanbul ignore start*/void 0 /*istanbul ignore end*/,
       operation = /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
-  for (var i = 0; i &#x3c; changes.length; i++) {
+  for (var i = 0; i &lt; changes.length; i++) {
     change = changes[i];
     if (change.added) {
       operation = 1;
@@ -1361,23 +1354,23 @@ obj !== null) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function convertChangesToXML(changes) {
   var ret = [];
-  for (var i = 0; i &#x3c; changes.length; i++) {
+  for (var i = 0; i &lt; changes.length; i++) {
     var change = changes[i];
     if (change.added) {
-      ret.push(&#x27;&#x3c;ins&#x3e;&#x27;);
+      ret.push('&lt;ins&gt;');
     } else if (change.removed) {
-      ret.push(&#x27;&#x3c;del&#x3e;&#x27;);
+      ret.push('&lt;del&gt;');
     }
 
     ret.push(escapeHTML(change.value));
 
     if (change.added) {
-      ret.push(&#x27;&#x3c;/ins&#x3e;&#x27;);
+      ret.push('&lt;/ins&gt;');
     } else if (change.removed) {
-      ret.push(&#x27;&#x3c;/del&#x3e;&#x27;);
+      ret.push('&lt;/del&gt;');
     }
   }
-  return ret.join(&#x27;&#x27;);
+  return ret.join('');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -1430,19 +1423,19 @@ This method is similar to createTwoFilesPatch, but returns a data structure
 
   var ret = [];
   if (oldFileName == newFileName) {
-    ret.push(&#x27;Index: &#x27; + oldFileName);
+    ret.push('Index: ' + oldFileName);
   }
-  ret.push(&#x27;===================================================================&#x27;);
-  ret.push(&#x27;--- &#x27; + diff.oldFileName + (typeof diff.oldHeader === &#x27;undefined&#x27; ? &#x27;&#x27; : &#x27;\t&#x27; + diff.oldHeader));
-  ret.push(&#x27;+++ &#x27; + diff.newFileName + (typeof diff.newHeader === &#x27;undefined&#x27; ? &#x27;&#x27; : &#x27;\t&#x27; + diff.newHeader));
+  ret.push('===================================================================');
+  ret.push('--- ' + diff.oldFileName + (typeof diff.oldHeader === 'undefined' ? '' : '\t' + diff.oldHeader));
+  ret.push('+++ ' + diff.newFileName + (typeof diff.newHeader === 'undefined' ? '' : '\t' + diff.newHeader));
 
-  for (var i = 0; i &#x3c; diff.hunks.length; i++) {
+  for (var i = 0; i &lt; diff.hunks.length; i++) {
     var hunk = diff.hunks[i];
-    ret.push(&#x27;@@ -&#x27; + hunk.oldStart + &#x27;,&#x27; + hunk.oldLines + &#x27; +&#x27; + hunk.newStart + &#x27;,&#x27; + hunk.newLines + &#x27; @@&#x27;);
+    ret.push('@@ -' + hunk.oldStart + ',' + hunk.oldLines + ' +' + hunk.newStart + ',' + hunk.newLines + ' @@');
     ret.push.apply(ret, hunk.lines);
   }
 
-  return ret.join(&#x27;\n&#x27;) + &#x27;\n&#x27;;
+  return ret.join('\n') + '\n';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -1768,7 +1761,7 @@ Options
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function parsePatch(uniDiff) {
-  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &#x3c;= 1 || arguments[1] === undefined ? {} : arguments
+  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &lt;= 1 || arguments[1] === undefined ? {} : arguments
 [1];
 
   var diffstr = uniDiff.split(/\r\n|[\n\v\f\r\x85]/),
@@ -1781,7 +1774,7 @@ Options
     list.push(index);
 
     // Parse diff metadata
-    while (i &#x3c; diffstr.length) {
+    while (i &lt; diffstr.length) {
       var line = diffstr[i];
 
       // File header found, end parsing diff metadata
@@ -1799,23 +1792,23 @@ Options
     }
 
     // Parse file headers if they are defined. Unified diff requires them, but
-    // there&#x27;s no technical issues to have an isolated hunk without file header
+    // there's no technical issues to have an isolated hunk without file header
     parseFileHeader(index);
     parseFileHeader(index);
 
     // Parse hunks
     index.hunks = [];
 
-    while (i &#x3c; diffstr.length) {
+    while (i &lt; diffstr.length) {
       var _line = diffstr[i];
 
       if (/^(Index:|diff|\-\-\-|\+\+\+)\s/.test(_line)) {
         break;
       } else if (/^@@/.test(_line)) {
         index.hunks.push(parseHunk());
-      } else if (_line &#x26;&#x26; options.strict) {
+      } else if (_line &amp;&amp; options.strict) {
         // Ignore unexpected content unless in strict mode
-        throw new Error(&#x27;Unknown line &#x27; + (i + 1) + &#x27; &#x27; + JSON.stringify(_line));
+        throw new Error('Unknown line ' + (i + 1) + ' ' + JSON.stringify(_line));
       } else {
         i++;
       }
@@ -1828,9 +1821,9 @@ Options
     var headerPattern = /^(---|\+\+\+)\s+([\S ]*)(?:\t(.*?)\s*)?$/;
     var fileHeader = headerPattern.exec(diffstr[i]);
     if (fileHeader) {
-      var keyPrefix = fileHeader[1] === &#x27;---&#x27; ? &#x27;old&#x27; : &#x27;new&#x27;;
-      index[keyPrefix + &#x27;FileName&#x27;] = fileHeader[2];
-      index[keyPrefix + &#x27;Header&#x27;] = fileHeader[3];
+      var keyPrefix = fileHeader[1] === '---' ? 'old' : 'new';
+      index[keyPrefix + 'FileName'] = fileHeader[2];
+      index[keyPrefix + 'Header'] = fileHeader[3];
 
       i++;
     }
@@ -1854,24 +1847,24 @@ Options
 
     var addCount = 0,
         removeCount = 0;
-    for (; i &#x3c; diffstr.length; i++) {
-      // Lines starting with &#x27;---&#x27; could be mistaken for the &#x22;remove line&#x22; operation
+    for (; i &lt; diffstr.length; i++) {
+      // Lines starting with '---' could be mistaken for the "remove line" operation
       // But they could be the header for the next file. Therefore prune such cases out.
-      if (diffstr[i].indexOf(&#x27;--- &#x27;) === 0 &#x26;&#x26; i + 2 &#x3c; diffstr.length &#x26;&#x26; diffstr[i + 1].indexOf(&#x27;+++ &#x27;) === 0 &#x26;&#x26; diffstr[i + 2].indexOf
-(&#x27;@@&#x27;) === 0) {
+      if (diffstr[i].indexOf('--- ') === 0 &amp;&amp; i + 2 &lt; diffstr.length &amp;&amp; diffstr[i + 1].indexOf('+++ ') === 0 &amp;&amp; diffstr[i + 2].indexOf
+('@@') === 0) {
         break;
       }
       var operation = diffstr[i][0];
 
-      if (operation === &#x27;+&#x27; || operation === &#x27;-&#x27; || operation === &#x27; &#x27; || operation === &#x27;\\&#x27;) {
+      if (operation === '+' || operation === '-' || operation === ' ' || operation === '\\') {
         hunk.lines.push(diffstr[i]);
-        hunk.linedelimiters.push(delimiters[i] || &#x27;\n&#x27;);
+        hunk.linedelimiters.push(delimiters[i] || '\n');
 
-        if (operation === &#x27;+&#x27;) {
+        if (operation === '+') {
           addCount++;
-        } else if (operation === &#x27;-&#x27;) {
+        } else if (operation === '-') {
           removeCount++;
-        } else if (operation === &#x27; &#x27;) {
+        } else if (operation === ' ') {
           addCount++;
           removeCount++;
         }
@@ -1881,27 +1874,27 @@ Options
     }
 
     // Handle the empty block count case
-    if (!addCount &#x26;&#x26; hunk.newLines === 1) {
+    if (!addCount &amp;&amp; hunk.newLines === 1) {
       hunk.newLines = 0;
     }
-    if (!removeCount &#x26;&#x26; hunk.oldLines === 1) {
+    if (!removeCount &amp;&amp; hunk.oldLines === 1) {
       hunk.oldLines = 0;
     }
 
     // Perform optional sanity checking
     if (options.strict) {
       if (addCount !== hunk.newLines) {
-        throw new Error(&#x27;Added line count did not match for hunk at line &#x27; + (chunkHeaderIndex + 1));
+        throw new Error('Added line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
       }
       if (removeCount !== hunk.oldLines) {
-        throw new Error(&#x27;Removed line count did not match for hunk at line &#x27; + (chunkHeaderIndex + 1));
+        throw new Error('Removed line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
       }
     }
 
     return hunk;
   }
 
-  while (i &#x3c; diffstr.length) {
+  while (i &lt; diffstr.length) {
     parseIndex();
   }
 
@@ -1914,7 +1907,7 @@ Options
     - `options.loadFile(index, callback)` is called. The caller should then load the contents of the file and then pass that to
 the `callback(err, data)` callback. Passing an `err` will terminate further patch execution.
     - `options.patched(index, content, callback)` is called once the patch has been applied. `content` will be the return value
-from `applyPatch`. When it&#x27;s ready, the caller should call `callback(err)` callback. Passing an `err` will terminate further
+from `applyPatch`. When it's ready, the caller should call `callback(err)` callback. Passing an `err` will terminate further
  patch execution.
 
     Once all patches have been applied or an error occurs, the `options.complete(err)` callback is made.
@@ -1946,16 +1939,16 @@ mode when supplied. This allows for larger diffs without blocking the event loop
   if (!options) {
     options = {};
   }
-  if (typeof options.context === &#x27;undefined&#x27;) {
+  if (typeof options.context === 'undefined') {
     options.context = 4;
   }
 
   var diff =<span class="apidocCodeCommentSpan"> /*istanbul ignore start*/(0, _line.diffLines) /*istanbul ignore end*/(oldStr, newStr, options);
-  diff.push({ value: &#x27;&#x27;, lines: [] }); // Append an empty value to make cleanup easier
+  diff.push({ value: '', lines: [] }); // Append an empty value to make cleanup easier
 
   function contextLines(lines) {
     return lines.map(function (entry) {
-      return &#x27; &#x27; + entry;
+      return ' ' + entry;
     });
   }
 
@@ -1968,7 +1961,7 @@ mode when supplied. This allows for larger diffs without blocking the event loop
   /*istanbul ignore start*/
 </span>  var _loop = function _loop( /*istanbul ignore end*/i) {
     var current = diff[i],
-        lines = current.lines || current.value.replace(/\n$/, &#x27;&#x27;).split(&#x27;\n&#x27;);
+        lines = current.lines || current.value.replace(/\n$/, '').split('\n');
     current.lines = lines;
 
     if (current.added || current.removed) {
@@ -1983,7 +1976,7 @@ mode when supplied. This allows for larger diffs without blocking the event loop
         newRangeStart = newLine;
 
         if (prev) {
-          curRange = options.context &#x3e; 0 ? contextLines(prev.lines.slice(-options.context)) : [];
+          curRange = options.context &gt; 0 ? contextLines(prev.lines.slice(-options.context)) : [];
           oldRangeStart -= curRange.length;
           newRangeStart -= curRange.length;
         }
@@ -1993,7 +1986,7 @@ mode when supplied. This allows for larger diffs without blocking the event loop
       /*istanbul ignore start*/(_curRange = /*istanbul ignore end*/curRange).push. /*istanbul ignore start*/apply /*istanbul ignore
  end*/( /*istanbul ignore start*/_curRange /*istanbul ignore end*/, /*istanbul ignore start*/_toConsumableArray( /*istanbul ignore
  end*/lines.map(function (entry) {
-        return (current.added ? &#x27;+&#x27; : &#x27;-&#x27;) + entry;
+        return (current.added ? '+' : '-') + entry;
       })));
 
       // Track the updated file position
@@ -2006,7 +1999,7 @@ mode when supplied. This allows for larger diffs without blocking the event loop
       // Identical context lines. Track line changes
       if (oldRangeStart) {
         // Close out any changes that have been output (or join overlapping)
-        if (lines.length &#x3c;= options.context * 2 &#x26;&#x26; i &#x3c; diff.length - 2) {
+        if (lines.length &lt;= options.context * 2 &amp;&amp; i &lt; diff.length - 2) {
           /*istanbul ignore start*/
           var _curRange2;
 
@@ -2033,15 +2026,15 @@ mode when supplied. This allows for larger diffs without blocking the event loop
             newLines: newLine - newRangeStart + contextSize,
             lines: curRange
           };
-          if (i &#x3e;= diff.length - 2 &#x26;&#x26; lines.length &#x3c;= options.context) {
+          if (i &gt;= diff.length - 2 &amp;&amp; lines.length &lt;= options.context) {
             // EOF is inside this hunk
             var oldEOFNewline = /\n$/.test(oldStr);
             var newEOFNewline = /\n$/.test(newStr);
-            if (lines.length == 0 &#x26;&#x26; !oldEOFNewline) {
+            if (lines.length == 0 &amp;&amp; !oldEOFNewline) {
               // special case: old has no eol and no trailing context; no-nl can end up before adds
-              curRange.splice(hunk.oldLines, 0, &#x27;\\ No newline at end of file&#x27;);
+              curRange.splice(hunk.oldLines, 0, '\\ No newline at end of file');
             } else if (!oldEOFNewline || !newEOFNewline) {
-              curRange.push(&#x27;\\ No newline at end of file&#x27;);
+              curRange.push('\\ No newline at end of file');
             }
           }
           hunks.push(hunk);
@@ -2065,7 +2058,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
 
 ```js
 {
-  oldFileName: &#x27;oldfile&#x27;, newFileName: &#x27;newfile&#x27;,
+  oldFileName: 'oldfile', newFileName: 'newfile',
 ...</pre></li>
     </ul>
 
@@ -2119,11 +2112,11 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function diff(oldString, newString) {
-<span class="apidocCodeCommentSpan">  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &#x3c;= 2 || arguments[2] === undefined ? {} : arguments
+<span class="apidocCodeCommentSpan">  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &lt;= 2 || arguments[2] === undefined ? {} : arguments
 [2];
 
   var callback = options.callback;
-  if (typeof options === &#x27;function&#x27;) {
+  if (typeof options === 'function') {
     callback = options;
     options = {};
   }
@@ -2157,14 +2150,14 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
 
   // Seed editLength = 0, i.e. the content starts with the same values
   var oldPos = this.extractCommon(bestPath[0], newString, oldString, 0);
-  if (bestPath[0].newPos + 1 &#x3e;= newLen &#x26;&#x26; oldPos + 1 &#x3e;= oldLen) {
+  if (bestPath[0].newPos + 1 &gt;= newLen &amp;&amp; oldPos + 1 &gt;= oldLen) {
     // Identity per the equality and tokenizer
     return done([{ value: this.join(newString), count: newString.length }]);
   }
 
   // Main worker method. checks all permutations of a given edit length for acceptance.
   function execEditLength() {
-    for (var diagonalPath = -1 * editLength; diagonalPath &#x3c;= editLength; diagonalPath += 2) {
+    for (var diagonalPath = -1 * editLength; diagonalPath &lt;= editLength; diagonalPath += 2) {
       var basePath = /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
       var addPath = bestPath[diagonalPath - 1],
           removePath = bestPath[diagonalPath + 1],
@@ -2174,9 +2167,9 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
         bestPath[diagonalPath - 1] = undefined;
       }
 
-      var canAdd = addPath &#x26;&#x26; addPath.newPos + 1 &#x3c; newLen,
-          canRemove = removePath &#x26;&#x26; 0 &#x3c;= _oldPos &#x26;&#x26; _oldPos &#x3c; oldLen;
-      if (!canAdd &#x26;&#x26; !canRemove) {
+      var canAdd = addPath &amp;&amp; addPath.newPos + 1 &lt; newLen,
+          canRemove = removePath &amp;&amp; 0 &lt;= _oldPos &amp;&amp; _oldPos &lt; oldLen;
+      if (!canAdd &amp;&amp; !canRemove) {
         // If this path is a terminal then prune
         bestPath[diagonalPath] = undefined;
         continue;
@@ -2185,11 +2178,11 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
       // Select the diagonal that we want to branch from. We select the prior
       // path whose position in the new string is the farthest from the origin
       // and does not pass the bounds of the diff graph
-      if (!canAdd || canRemove &#x26;&#x26; addPath.newPos &#x3c; removePath.newPos) {
+      if (!canAdd || canRemove &amp;&amp; addPath.newPos &lt; removePath.newPos) {
         basePath = clonePath(removePath);
         self.pushComponent(basePath.components, undefined, true);
       } else {
-        basePath = addPath; // No need to clone, we&#x27;ve pulled it from the list
+        basePath = addPath; // No need to clone, we've pulled it from the list
         basePath.newPos++;
         self.pushComponent(basePath.components, true, undefined);
       }
@@ -2197,7 +2190,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
       _oldPos = self.extractCommon(basePath, newString, oldString, diagonalPath);
 
       // If we have hit the end of both strings, then we are done
-      if (basePath.newPos + 1 &#x3e;= newLen &#x26;&#x26; _oldPos + 1 &#x3e;= oldLen) {
+      if (basePath.newPos + 1 &gt;= newLen &amp;&amp; _oldPos + 1 &gt;= oldLen) {
         return done(buildValues(self, basePath.components, newString, oldString, self.useLongestToken));
       } else {
         // Otherwise track this path as a potential candidate and continue.
@@ -2216,7 +2209,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
       setTimeout(function () {
         // This should not happen, but we want to be safe.
         /* istanbul ignore next */
-</span>        if (editLength &#x3e; maxEditLength) {
+</span>        if (editLength &gt; maxEditLength) {
           return callback();
         }
 
@@ -2226,7 +2219,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
       }, 0);
     })();
   } else {
-    while (editLength &#x3c;= maxEditLength) {
+    while (editLength &lt;= maxEditLength) {
       var ret = execEditLength();
       if (ret) {
         return ret;
@@ -2267,7 +2260,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
       newPos = basePath.newPos,
       oldPos = newPos - diagonalPath,
       commonCount = 0;
-  while (newPos + 1 &#x3c; newLen &#x26;&#x26; oldPos + 1 &#x3c; oldLen &#x26;&#x26; this.equals(newString[newPos + 1], oldString[oldPos + 1])) {
+  while (newPos + 1 &lt; newLen &amp;&amp; oldPos + 1 &lt; oldLen &amp;&amp; this.equals(newString[newPos + 1], oldString[oldPos + 1])) {
     newPos++;
     oldPos++;
     commonCount++;
@@ -2293,7 +2286,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function join(chars) {
-  return chars.join(&#x27;&#x27;);
+  return chars.join('');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2309,7 +2302,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function pushComponent(components, added, removed) {
   var last = components[components.length - 1];
-  if (last &#x26;&#x26; last.added === added &#x26;&#x26; last.removed === removed) {
+  if (last &amp;&amp; last.added === added &amp;&amp; last.removed === removed) {
     // We need to clone here as the component clone operation is just
     // as shallow array clone
     components[components.length - 1] = { count: last.count + 1, added: added, removed: removed };
@@ -2331,7 +2324,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function removeEmpty(array) {
   var ret = [];
-  for (var i = 0; i &#x3c; array.length; i++) {
+  for (var i = 0; i &lt; array.length; i++) {
     if (array[i]) {
       ret.push(array[i]);
     }
@@ -2351,7 +2344,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function tokenize(value) {
-  return value.split(&#x27;&#x27;);
+  return value.split('');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2391,11 +2384,11 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function diff(oldString, newString) {
-<span class="apidocCodeCommentSpan">  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &#x3c;= 2 || arguments[2] === undefined ? {} : arguments
+<span class="apidocCodeCommentSpan">  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &lt;= 2 || arguments[2] === undefined ? {} : arguments
 [2];
 
   var callback = options.callback;
-  if (typeof options === &#x27;function&#x27;) {
+  if (typeof options === 'function') {
     callback = options;
     options = {};
   }
@@ -2429,14 +2422,14 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
 
   // Seed editLength = 0, i.e. the content starts with the same values
   var oldPos = this.extractCommon(bestPath[0], newString, oldString, 0);
-  if (bestPath[0].newPos + 1 &#x3e;= newLen &#x26;&#x26; oldPos + 1 &#x3e;= oldLen) {
+  if (bestPath[0].newPos + 1 &gt;= newLen &amp;&amp; oldPos + 1 &gt;= oldLen) {
     // Identity per the equality and tokenizer
     return done([{ value: this.join(newString), count: newString.length }]);
   }
 
   // Main worker method. checks all permutations of a given edit length for acceptance.
   function execEditLength() {
-    for (var diagonalPath = -1 * editLength; diagonalPath &#x3c;= editLength; diagonalPath += 2) {
+    for (var diagonalPath = -1 * editLength; diagonalPath &lt;= editLength; diagonalPath += 2) {
       var basePath = /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
       var addPath = bestPath[diagonalPath - 1],
           removePath = bestPath[diagonalPath + 1],
@@ -2446,9 +2439,9 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
         bestPath[diagonalPath - 1] = undefined;
       }
 
-      var canAdd = addPath &#x26;&#x26; addPath.newPos + 1 &#x3c; newLen,
-          canRemove = removePath &#x26;&#x26; 0 &#x3c;= _oldPos &#x26;&#x26; _oldPos &#x3c; oldLen;
-      if (!canAdd &#x26;&#x26; !canRemove) {
+      var canAdd = addPath &amp;&amp; addPath.newPos + 1 &lt; newLen,
+          canRemove = removePath &amp;&amp; 0 &lt;= _oldPos &amp;&amp; _oldPos &lt; oldLen;
+      if (!canAdd &amp;&amp; !canRemove) {
         // If this path is a terminal then prune
         bestPath[diagonalPath] = undefined;
         continue;
@@ -2457,11 +2450,11 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
       // Select the diagonal that we want to branch from. We select the prior
       // path whose position in the new string is the farthest from the origin
       // and does not pass the bounds of the diff graph
-      if (!canAdd || canRemove &#x26;&#x26; addPath.newPos &#x3c; removePath.newPos) {
+      if (!canAdd || canRemove &amp;&amp; addPath.newPos &lt; removePath.newPos) {
         basePath = clonePath(removePath);
         self.pushComponent(basePath.components, undefined, true);
       } else {
-        basePath = addPath; // No need to clone, we&#x27;ve pulled it from the list
+        basePath = addPath; // No need to clone, we've pulled it from the list
         basePath.newPos++;
         self.pushComponent(basePath.components, true, undefined);
       }
@@ -2469,7 +2462,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
       _oldPos = self.extractCommon(basePath, newString, oldString, diagonalPath);
 
       // If we have hit the end of both strings, then we are done
-      if (basePath.newPos + 1 &#x3e;= newLen &#x26;&#x26; _oldPos + 1 &#x3e;= oldLen) {
+      if (basePath.newPos + 1 &gt;= newLen &amp;&amp; _oldPos + 1 &gt;= oldLen) {
         return done(buildValues(self, basePath.components, newString, oldString, self.useLongestToken));
       } else {
         // Otherwise track this path as a potential candidate and continue.
@@ -2488,7 +2481,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
       setTimeout(function () {
         // This should not happen, but we want to be safe.
         /* istanbul ignore next */
-</span>        if (editLength &#x3e; maxEditLength) {
+</span>        if (editLength &gt; maxEditLength) {
           return callback();
         }
 
@@ -2498,7 +2491,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
       }, 0);
     })();
   } else {
-    while (editLength &#x3c;= maxEditLength) {
+    while (editLength &lt;= maxEditLength) {
       var ret = execEditLength();
       if (ret) {
         return ret;
@@ -2549,7 +2542,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
       newPos = basePath.newPos,
       oldPos = newPos - diagonalPath,
       commonCount = 0;
-  while (newPos + 1 &#x3c; newLen &#x26;&#x26; oldPos + 1 &#x3c; oldLen &#x26;&#x26; this.equals(newString[newPos + 1], oldString[oldPos + 1])) {
+  while (newPos + 1 &lt; newLen &amp;&amp; oldPos + 1 &lt; oldLen &amp;&amp; this.equals(newString[newPos + 1], oldString[oldPos + 1])) {
     newPos++;
     oldPos++;
     commonCount++;
@@ -2580,7 +2573,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function join(chars) {
-  return chars.join(&#x27;&#x27;);
+  return chars.join('');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2601,7 +2594,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function pushComponent(components, added, removed) {
   var last = components[components.length - 1];
-  if (last &#x26;&#x26; last.added === added &#x26;&#x26; last.removed === removed) {
+  if (last &amp;&amp; last.added === added &amp;&amp; last.removed === removed) {
     // We need to clone here as the component clone operation is just
     // as shallow array clone
     components[components.length - 1] = { count: last.count + 1, added: added, removed: removed };
@@ -2628,7 +2621,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function removeEmpty(array) {
   var ret = [];
-  for (var i = 0; i &#x3c; array.length; i++) {
+  for (var i = 0; i &lt; array.length; i++) {
     if (array[i]) {
       ret.push(array[i]);
     }
@@ -2653,7 +2646,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function tokenize(value) {
-  return value.split(&#x27;&#x27;);
+  return value.split('');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -2673,16 +2666,16 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function applyPatch(source, uniDiff) {
-<span class="apidocCodeCommentSpan">  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &#x3c;= 2 || arguments[2] === undefined ? {} : arguments
+<span class="apidocCodeCommentSpan">  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &lt;= 2 || arguments[2] === undefined ? {} : arguments
 [2];
 
-  if (typeof uniDiff === &#x27;string&#x27;) {
+  if (typeof uniDiff === 'string') {
     uniDiff = /*istanbul ignore start*/(0, _parse.parsePatch) /*istanbul ignore end*/(uniDiff);
   }
 
   if (Array.isArray(uniDiff)) {
-    if (uniDiff.length &#x3e; 1) {
-      throw new Error(&#x27;applyPatch only works with a single input.&#x27;);
+    if (uniDiff.length &gt; 1) {
+      throw new Error('applyPatch only works with a single input.');
     }
 
     uniDiff = uniDiff[0];
@@ -2707,17 +2700,17 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
    * Checks if the hunk exactly fits on the provided location
    */
 </span>  function hunkFits(hunk, toPos) {
-    for (var j = 0; j &#x3c; hunk.lines.length; j++) {
+    for (var j = 0; j &lt; hunk.lines.length; j++) {
       var line = hunk.lines[j],
           operation = line[0],
           content = line.substr(1);
 
-      if (operation === &#x27; &#x27; || operation === &#x27;-&#x27;) {
+      if (operation === ' ' || operation === '-') {
         // Context sanity check
         if (!compareLine(toPos + 1, lines[toPos], operation, content)) {
           errorCount++;
 
-          if (errorCount &#x3e; fuzzFactor) {
+          if (errorCount &gt; fuzzFactor) {
             return false;
           }
         }
@@ -2729,13 +2722,13 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
   }
 
   // Search best fit offsets for each hunk based on the previous ones
-  for (var i = 0; i &#x3c; hunks.length; i++) {
+  for (var i = 0; i &lt; hunks.length; i++) {
     var hunk = hunks[i],
         maxLine = lines.length - hunk.oldLines,
         localOffset = 0,
         toPos = offset + hunk.oldStart - 1;
 
-    var iterator = /*istanbul ignore start*/(0, _distanceIterator2[&#x27;default&#x27;]) /*istanbul ignore end*/(toPos, minLine, maxLine);
+    var iterator = /*istanbul ignore start*/(0, _distanceIterator2['default']) /*istanbul ignore end*/(toPos, minLine, maxLine);
 
     for (; localOffset !== undefined; localOffset = iterator()) {
       if (hunkFits(hunk, toPos + localOffset)) {
@@ -2748,40 +2741,40 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
       return false;
     }
 
-    // Set lower text limit to end of the current hunk, so next ones don&#x27;t try
+    // Set lower text limit to end of the current hunk, so next ones don't try
     // to fit over already patched text
     minLine = hunk.offset + hunk.oldStart + hunk.oldLines;
   }
 
   // Apply patch hunks
-  for (var _i = 0; _i &#x3c; hunks.length; _i++) {
+  for (var _i = 0; _i &lt; hunks.length; _i++) {
     var _hunk = hunks[_i],
         _toPos = _hunk.offset + _hunk.newStart - 1;
     if (_hunk.newLines == 0) {
       _toPos++;
     }
 
-    for (var j = 0; j &#x3c; _hunk.lines.length; j++) {
+    for (var j = 0; j &lt; _hunk.lines.length; j++) {
       var line = _hunk.lines[j],
           operation = line[0],
           content = line.substr(1),
           delimiter = _hunk.linedelimiters[j];
 
-      if (operation === &#x27; &#x27;) {
+      if (operation === ' ') {
         _toPos++;
-      } else if (operation === &#x27;-&#x27;) {
+      } else if (operation === '-') {
         lines.splice(_toPos, 1);
         delimiters.splice(_toPos, 1);
         /* istanbul ignore else */
-      } else if (operation === &#x27;+&#x27;) {
+      } else if (operation === '+') {
           lines.splice(_toPos, 0, content);
           delimiters.splice(_toPos, 0, delimiter);
           _toPos++;
-        } else if (operation === &#x27;\\&#x27;) {
+        } else if (operation === '\\') {
           var previousOperation = _hunk.lines[j - 1] ? _hunk.lines[j - 1][0] : null;
-          if (previousOperation === &#x27;+&#x27;) {
+          if (previousOperation === '+') {
             removeEOFNL = true;
-          } else if (previousOperation === &#x27;-&#x27;) {
+          } else if (previousOperation === '-') {
             addEOFNL = true;
           }
         }
@@ -2795,18 +2788,18 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
       delimiters.pop();
     }
   } else if (addEOFNL) {
-    lines.push(&#x27;&#x27;);
-    delimiters.push(&#x27;\n&#x27;);
+    lines.push('');
+    delimiters.push('\n');
   }
-  for (var _k = 0; _k &#x3c; lines.length - 1; _k++) {
+  for (var _k = 0; _k &lt; lines.length - 1; _k++) {
     lines[_k] = lines[_k] + delimiters[_k];
   }
-  return lines.join(&#x27;&#x27;);
+  return lines.join('');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
   hunks: [{
     oldStart: 1, oldLines: 3, newStart: 1, newLines: 3,
-    lines: [&#x27; line2&#x27;, &#x27; line3&#x27;, &#x27;-line4&#x27;, &#x27;+line5&#x27;, &#x27;\\ No newline at end of file&#
+    lines: [' line2', ' line3', '-line4', '+line5', '\\ No newline at end of file&amp;#
 x27;],
   }]
 }
@@ -2841,7 +2834,7 @@ be considered equal when patching. Defaults to strict equality but may be overri
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function applyPatches(uniDiff, options) {
-  if (typeof uniDiff === &#x27;string&#x27;) {
+  if (typeof uniDiff === 'string') {
     uniDiff = /*istanbul ignore start*/(0, _parse.parsePatch) /*istanbul ignore end*/(uniDiff);
   }
 
@@ -2888,7 +2881,7 @@ patch index is:
 - `options.loadFile(index, callback)` is called. The caller should then load the contents of the file and then pass that to the `
 callback(err, data)` callback. Passing an `err` will terminate further patch execution.
 - `options.patched(index, content, callback)` is called once the patch has been applied. `content` will be the return value from
- `applyPatch`. When it&#x27;s ready, the caller should call `callback(err)` callback. Passing an `err` will terminate further patch
+ `applyPatch`. When it's ready, the caller should call `callback(err)` callback. Passing an `err` will terminate further patch
  execution.
 
 Once all patches have been applied or an error occurs, the `options.complete(err)` callback is made.
@@ -2915,7 +2908,7 @@ Once all patches have been applied or an error occurs, the `options.complete(err
 
   var i =<span class="apidocCodeCommentSpan"> /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
 
-  for (i = 0; i &#x3c; stack.length; i += 1) {
+  for (i = 0; i &lt; stack.length; i += 1) {
     if (stack[i] === obj) {
       return replacementStack[i];
     }
@@ -2923,11 +2916,11 @@ Once all patches have been applied or an error occurs, the `options.complete(err
 
   var canonicalizedObj = /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
 
-  if (&#x27;[object Array]&#x27; === objectPrototypeToString.call(obj)) {
+  if ('[object Array]' === objectPrototypeToString.call(obj)) {
     stack.push(obj);
     canonicalizedObj = new Array(obj.length);
     replacementStack.push(canonicalizedObj);
-    for (i = 0; i &#x3c; obj.length; i += 1) {
+    for (i = 0; i &lt; obj.length; i += 1) {
       canonicalizedObj[i] = canonicalize(obj[i], stack, replacementStack);
     }
     stack.pop();
@@ -2935,11 +2928,11 @@ Once all patches have been applied or an error occurs, the `options.complete(err
     return canonicalizedObj;
   }
 
-  if (obj &#x26;&#x26; obj.toJSON) {
+  if (obj &amp;&amp; obj.toJSON) {
     obj = obj.toJSON();
   }
 
-  if ( /*istanbul ignore start*/(typeof /*istanbul ignore end*/obj === &#x27;undefined&#x27; ? &#x27;undefined&#x27; : _typeof(obj)) === &#x27;object&#x27; &#x26;&#x26;
+  if ( /*istanbul ignore start*/(typeof /*istanbul ignore end*/obj === 'undefined' ? 'undefined' : _typeof(obj)) === 'object' &amp;&amp;
 obj !== null) {
     stack.push(obj);
     canonicalizedObj = {};
@@ -2953,7 +2946,7 @@ obj !== null) {
       }
     }
     sortedKeys.sort();
-    for (i = 0; i &#x3c; sortedKeys.length; i += 1) {
+    for (i = 0; i &lt; sortedKeys.length; i += 1) {
       key = sortedKeys[i];
       canonicalizedObj[key] = canonicalize(obj[key], stack, replacementStack);
     }
@@ -2985,7 +2978,7 @@ obj !== null) {
   var ret = [],
       change = /*istanbul ignore start*/void 0 /*istanbul ignore end*/,
       operation = /*istanbul ignore start*/void 0 /*istanbul ignore end*/;
-  for (var i = 0; i &#x3c; changes.length; i++) {
+  for (var i = 0; i &lt; changes.length; i++) {
     change = changes[i];
     if (change.added) {
       operation = 1;
@@ -3018,23 +3011,23 @@ obj !== null) {
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function convertChangesToXML(changes) {
   var ret = [];
-  for (var i = 0; i &#x3c; changes.length; i++) {
+  for (var i = 0; i &lt; changes.length; i++) {
     var change = changes[i];
     if (change.added) {
-      ret.push(&#x27;&#x3c;ins&#x3e;&#x27;);
+      ret.push('&lt;ins&gt;');
     } else if (change.removed) {
-      ret.push(&#x27;&#x3c;del&#x3e;&#x27;);
+      ret.push('&lt;del&gt;');
     }
 
     ret.push(escapeHTML(change.value));
 
     if (change.added) {
-      ret.push(&#x27;&#x3c;/ins&#x3e;&#x27;);
+      ret.push('&lt;/ins&gt;');
     } else if (change.removed) {
-      ret.push(&#x27;&#x3c;/del&#x3e;&#x27;);
+      ret.push('&lt;/del&gt;');
     }
   }
-  return ret.join(&#x27;&#x27;);
+  return ret.join('');
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">n/a</pre></li>
     </ul>
@@ -3097,19 +3090,19 @@ This method is similar to createTwoFilesPatch, but returns a data structure
 
   var ret = [];
   if (oldFileName == newFileName) {
-    ret.push(&#x27;Index: &#x27; + oldFileName);
+    ret.push('Index: ' + oldFileName);
   }
-  ret.push(&#x27;===================================================================&#x27;);
-  ret.push(&#x27;--- &#x27; + diff.oldFileName + (typeof diff.oldHeader === &#x27;undefined&#x27; ? &#x27;&#x27; : &#x27;\t&#x27; + diff.oldHeader));
-  ret.push(&#x27;+++ &#x27; + diff.newFileName + (typeof diff.newHeader === &#x27;undefined&#x27; ? &#x27;&#x27; : &#x27;\t&#x27; + diff.newHeader));
+  ret.push('===================================================================');
+  ret.push('--- ' + diff.oldFileName + (typeof diff.oldHeader === 'undefined' ? '' : '\t' + diff.oldHeader));
+  ret.push('+++ ' + diff.newFileName + (typeof diff.newHeader === 'undefined' ? '' : '\t' + diff.newHeader));
 
-  for (var i = 0; i &#x3c; diff.hunks.length; i++) {
+  for (var i = 0; i &lt; diff.hunks.length; i++) {
     var hunk = diff.hunks[i];
-    ret.push(&#x27;@@ -&#x27; + hunk.oldStart + &#x27;,&#x27; + hunk.oldLines + &#x27; +&#x27; + hunk.newStart + &#x27;,&#x27; + hunk.newLines + &#x27; @@&#x27;);
+    ret.push('@@ -' + hunk.oldStart + ',' + hunk.oldLines + ' +' + hunk.newStart + ',' + hunk.newLines + ' @@');
     ret.push.apply(ret, hunk.lines);
   }
 
-  return ret.join(&#x27;\n&#x27;) + &#x27;\n&#x27;;
+  return ret.join('\n') + '\n';
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
 
@@ -3485,7 +3478,7 @@ Options
     </h2>
     <ul>
     <li>description and source-code<pre class="apidocCodePre">function parsePatch(uniDiff) {
-  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &#x3c;= 1 || arguments[1] === undefined ? {} : arguments
+  /*istanbul ignore start*/var /*istanbul ignore end*/options = arguments.length &lt;= 1 || arguments[1] === undefined ? {} : arguments
 [1];
 
   var diffstr = uniDiff.split(/\r\n|[\n\v\f\r\x85]/),
@@ -3498,7 +3491,7 @@ Options
     list.push(index);
 
     // Parse diff metadata
-    while (i &#x3c; diffstr.length) {
+    while (i &lt; diffstr.length) {
       var line = diffstr[i];
 
       // File header found, end parsing diff metadata
@@ -3516,23 +3509,23 @@ Options
     }
 
     // Parse file headers if they are defined. Unified diff requires them, but
-    // there&#x27;s no technical issues to have an isolated hunk without file header
+    // there's no technical issues to have an isolated hunk without file header
     parseFileHeader(index);
     parseFileHeader(index);
 
     // Parse hunks
     index.hunks = [];
 
-    while (i &#x3c; diffstr.length) {
+    while (i &lt; diffstr.length) {
       var _line = diffstr[i];
 
       if (/^(Index:|diff|\-\-\-|\+\+\+)\s/.test(_line)) {
         break;
       } else if (/^@@/.test(_line)) {
         index.hunks.push(parseHunk());
-      } else if (_line &#x26;&#x26; options.strict) {
+      } else if (_line &amp;&amp; options.strict) {
         // Ignore unexpected content unless in strict mode
-        throw new Error(&#x27;Unknown line &#x27; + (i + 1) + &#x27; &#x27; + JSON.stringify(_line));
+        throw new Error('Unknown line ' + (i + 1) + ' ' + JSON.stringify(_line));
       } else {
         i++;
       }
@@ -3545,9 +3538,9 @@ Options
     var headerPattern = /^(---|\+\+\+)\s+([\S ]*)(?:\t(.*?)\s*)?$/;
     var fileHeader = headerPattern.exec(diffstr[i]);
     if (fileHeader) {
-      var keyPrefix = fileHeader[1] === &#x27;---&#x27; ? &#x27;old&#x27; : &#x27;new&#x27;;
-      index[keyPrefix + &#x27;FileName&#x27;] = fileHeader[2];
-      index[keyPrefix + &#x27;Header&#x27;] = fileHeader[3];
+      var keyPrefix = fileHeader[1] === '---' ? 'old' : 'new';
+      index[keyPrefix + 'FileName'] = fileHeader[2];
+      index[keyPrefix + 'Header'] = fileHeader[3];
 
       i++;
     }
@@ -3571,24 +3564,24 @@ Options
 
     var addCount = 0,
         removeCount = 0;
-    for (; i &#x3c; diffstr.length; i++) {
-      // Lines starting with &#x27;---&#x27; could be mistaken for the &#x22;remove line&#x22; operation
+    for (; i &lt; diffstr.length; i++) {
+      // Lines starting with '---' could be mistaken for the "remove line" operation
       // But they could be the header for the next file. Therefore prune such cases out.
-      if (diffstr[i].indexOf(&#x27;--- &#x27;) === 0 &#x26;&#x26; i + 2 &#x3c; diffstr.length &#x26;&#x26; diffstr[i + 1].indexOf(&#x27;+++ &#x27;) === 0 &#x26;&#x26; diffstr[i + 2].indexOf
-(&#x27;@@&#x27;) === 0) {
+      if (diffstr[i].indexOf('--- ') === 0 &amp;&amp; i + 2 &lt; diffstr.length &amp;&amp; diffstr[i + 1].indexOf('+++ ') === 0 &amp;&amp; diffstr[i + 2].indexOf
+('@@') === 0) {
         break;
       }
       var operation = diffstr[i][0];
 
-      if (operation === &#x27;+&#x27; || operation === &#x27;-&#x27; || operation === &#x27; &#x27; || operation === &#x27;\\&#x27;) {
+      if (operation === '+' || operation === '-' || operation === ' ' || operation === '\\') {
         hunk.lines.push(diffstr[i]);
-        hunk.linedelimiters.push(delimiters[i] || &#x27;\n&#x27;);
+        hunk.linedelimiters.push(delimiters[i] || '\n');
 
-        if (operation === &#x27;+&#x27;) {
+        if (operation === '+') {
           addCount++;
-        } else if (operation === &#x27;-&#x27;) {
+        } else if (operation === '-') {
           removeCount++;
-        } else if (operation === &#x27; &#x27;) {
+        } else if (operation === ' ') {
           addCount++;
           removeCount++;
         }
@@ -3598,27 +3591,27 @@ Options
     }
 
     // Handle the empty block count case
-    if (!addCount &#x26;&#x26; hunk.newLines === 1) {
+    if (!addCount &amp;&amp; hunk.newLines === 1) {
       hunk.newLines = 0;
     }
-    if (!removeCount &#x26;&#x26; hunk.oldLines === 1) {
+    if (!removeCount &amp;&amp; hunk.oldLines === 1) {
       hunk.oldLines = 0;
     }
 
     // Perform optional sanity checking
     if (options.strict) {
       if (addCount !== hunk.newLines) {
-        throw new Error(&#x27;Added line count did not match for hunk at line &#x27; + (chunkHeaderIndex + 1));
+        throw new Error('Added line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
       }
       if (removeCount !== hunk.oldLines) {
-        throw new Error(&#x27;Removed line count did not match for hunk at line &#x27; + (chunkHeaderIndex + 1));
+        throw new Error('Removed line count did not match for hunk at line ' + (chunkHeaderIndex + 1));
       }
     }
 
     return hunk;
   }
 
-  while (i &#x3c; diffstr.length) {
+  while (i &lt; diffstr.length) {
     parseIndex();
   }
 
@@ -3631,7 +3624,7 @@ Options
     - `options.loadFile(index, callback)` is called. The caller should then load the contents of the file and then pass that to
 the `callback(err, data)` callback. Passing an `err` will terminate further patch execution.
     - `options.patched(index, content, callback)` is called once the patch has been applied. `content` will be the return value
-from `applyPatch`. When it&#x27;s ready, the caller should call `callback(err)` callback. Passing an `err` will terminate further
+from `applyPatch`. When it's ready, the caller should call `callback(err)` callback. Passing an `err` will terminate further
  patch execution.
 
     Once all patches have been applied or an error occurs, the `options.complete(err)` callback is made.
@@ -3668,16 +3661,16 @@ mode when supplied. This allows for larger diffs without blocking the event loop
   if (!options) {
     options = {};
   }
-  if (typeof options.context === &#x27;undefined&#x27;) {
+  if (typeof options.context === 'undefined') {
     options.context = 4;
   }
 
   var diff =<span class="apidocCodeCommentSpan"> /*istanbul ignore start*/(0, _line.diffLines) /*istanbul ignore end*/(oldStr, newStr, options);
-  diff.push({ value: &#x27;&#x27;, lines: [] }); // Append an empty value to make cleanup easier
+  diff.push({ value: '', lines: [] }); // Append an empty value to make cleanup easier
 
   function contextLines(lines) {
     return lines.map(function (entry) {
-      return &#x27; &#x27; + entry;
+      return ' ' + entry;
     });
   }
 
@@ -3690,7 +3683,7 @@ mode when supplied. This allows for larger diffs without blocking the event loop
   /*istanbul ignore start*/
 </span>  var _loop = function _loop( /*istanbul ignore end*/i) {
     var current = diff[i],
-        lines = current.lines || current.value.replace(/\n$/, &#x27;&#x27;).split(&#x27;\n&#x27;);
+        lines = current.lines || current.value.replace(/\n$/, '').split('\n');
     current.lines = lines;
 
     if (current.added || current.removed) {
@@ -3705,7 +3698,7 @@ mode when supplied. This allows for larger diffs without blocking the event loop
         newRangeStart = newLine;
 
         if (prev) {
-          curRange = options.context &#x3e; 0 ? contextLines(prev.lines.slice(-options.context)) : [];
+          curRange = options.context &gt; 0 ? contextLines(prev.lines.slice(-options.context)) : [];
           oldRangeStart -= curRange.length;
           newRangeStart -= curRange.length;
         }
@@ -3715,7 +3708,7 @@ mode when supplied. This allows for larger diffs without blocking the event loop
       /*istanbul ignore start*/(_curRange = /*istanbul ignore end*/curRange).push. /*istanbul ignore start*/apply /*istanbul ignore
  end*/( /*istanbul ignore start*/_curRange /*istanbul ignore end*/, /*istanbul ignore start*/_toConsumableArray( /*istanbul ignore
  end*/lines.map(function (entry) {
-        return (current.added ? &#x27;+&#x27; : &#x27;-&#x27;) + entry;
+        return (current.added ? '+' : '-') + entry;
       })));
 
       // Track the updated file position
@@ -3728,7 +3721,7 @@ mode when supplied. This allows for larger diffs without blocking the event loop
       // Identical context lines. Track line changes
       if (oldRangeStart) {
         // Close out any changes that have been output (or join overlapping)
-        if (lines.length &#x3c;= options.context * 2 &#x26;&#x26; i &#x3c; diff.length - 2) {
+        if (lines.length &lt;= options.context * 2 &amp;&amp; i &lt; diff.length - 2) {
           /*istanbul ignore start*/
           var _curRange2;
 
@@ -3755,15 +3748,15 @@ mode when supplied. This allows for larger diffs without blocking the event loop
             newLines: newLine - newRangeStart + contextSize,
             lines: curRange
           };
-          if (i &#x3e;= diff.length - 2 &#x26;&#x26; lines.length &#x3c;= options.context) {
+          if (i &gt;= diff.length - 2 &amp;&amp; lines.length &lt;= options.context) {
             // EOF is inside this hunk
             var oldEOFNewline = /\n$/.test(oldStr);
             var newEOFNewline = /\n$/.test(newStr);
-            if (lines.length == 0 &#x26;&#x26; !oldEOFNewline) {
+            if (lines.length == 0 &amp;&amp; !oldEOFNewline) {
               // special case: old has no eol and no trailing context; no-nl can end up before adds
-              curRange.splice(hunk.oldLines, 0, &#x27;\\ No newline at end of file&#x27;);
+              curRange.splice(hunk.oldLines, 0, '\\ No newline at end of file');
             } else if (!oldEOFNewline || !newEOFNewline) {
-              curRange.push(&#x27;\\ No newline at end of file&#x27;);
+              curRange.push('\\ No newline at end of file');
             }
           }
           hunks.push(hunk);
@@ -3787,7 +3780,7 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
 
 ```js
 {
-  oldFileName: &#x27;oldfile&#x27;, newFileName: &#x27;newfile&#x27;,
+  oldFileName: 'oldfile', newFileName: 'newfile',
 ...</pre></li>
     </ul>
 
@@ -3800,3 +3793,4 @@ suitable for further processing. Parameters are the same as createTwoFilesPatch.
     ]
 </div>
 </div>
+</body></html>
