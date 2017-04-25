@@ -1,32 +1,32 @@
 <svg height="462" width="720" xmlns="http://www.w3.org/2000/svg">
 <rect height="462" fill="#555" width="720"></rect>
 <text fill="#7f7" font-family="Courier New" font-size="12" xml:space="preserve">
-<tspan x="10" y="26">  0.  2017-04-17 11:58:37 +0000   338409 bytes  .</tspan>
-<tspan x="10" y="42">  1.  2017-04-17 11:58:37 +0000     1222 bytes  CONTRIBUTING.md</tspan>
-<tspan x="10" y="58">  2.  2017-04-17 11:58:37 +0000     1572 bytes  LICENSE</tspan>
-<tspan x="10" y="74">  3.  2017-04-17 11:58:37 +0000     8574 bytes  README.md</tspan>
-<tspan x="10" y="90">  4.  2017-04-17 11:58:37 +0000   125290 bytes  dist/diff.js</tspan>
-<tspan x="10" y="106">  5.  2017-04-17 11:58:37 +0000    23926 bytes  dist/diff.min.js</tspan>
-<tspan x="10" y="122">  6.  2017-04-17 11:58:37 +0000     2066 bytes  lib/convert/dmp.js</tspan>
-<tspan x="10" y="138">  7.  2017-04-17 11:58:37 +0000     2835 bytes  lib/convert/xml.js</tspan>
-<tspan x="10" y="154">  8.  2017-04-17 11:58:37 +0000     1746 bytes  lib/diff/array.js</tspan>
-<tspan x="10" y="170">  9.  2017-04-17 11:58:37 +0000    25812 bytes  lib/diff/base.js</tspan>
-<tspan x="10" y="186"> 10.  2017-04-17 11:58:37 +0000     1466 bytes  lib/diff/character.js</tspan>
-<tspan x="10" y="202"> 11.  2017-04-17 11:58:37 +0000     1701 bytes  lib/diff/css.js</tspan>
-<tspan x="10" y="218"> 12.  2017-04-17 11:58:37 +0000    10396 bytes  lib/diff/json.js</tspan>
-<tspan x="10" y="234"> 13.  2017-04-17 11:58:37 +0000     4865 bytes  lib/diff/line.js</tspan>
-<tspan x="10" y="250"> 14.  2017-04-17 11:58:37 +0000     1812 bytes  lib/diff/sentence.js</tspan>
-<tspan x="10" y="266"> 15.  2017-04-17 11:58:37 +0000     7094 bytes  lib/diff/word.js</tspan>
-<tspan x="10" y="282"> 16.  2017-04-17 11:58:37 +0000     7129 bytes  lib/index.js</tspan>
-<tspan x="10" y="298"> 17.  2017-04-17 11:58:37 +0000    16398 bytes  lib/patch/apply.js</tspan>
-<tspan x="10" y="314"> 18.  2017-04-17 11:58:37 +0000    17554 bytes  lib/patch/create.js</tspan>
-<tspan x="10" y="330"> 19.  2017-04-17 11:58:37 +0000    39223 bytes  lib/patch/merge.js</tspan>
-<tspan x="10" y="346"> 20.  2017-04-17 11:58:37 +0000    13474 bytes  lib/patch/parse.js</tspan>
-<tspan x="10" y="362"> 21.  2017-04-17 11:58:37 +0000     1881 bytes  lib/util/array.js</tspan>
-<tspan x="10" y="378"> 22.  2017-04-17 11:58:37 +0000     3968 bytes  lib/util/distance-iterator.js</tspan>
-<tspan x="10" y="394"> 23.  2017-04-17 11:58:37 +0000     1561 bytes  lib/util/params.js</tspan>
-<tspan x="10" y="410"> 24.  2017-04-17 11:58:37 +0000     3381 bytes  package.json</tspan>
-<tspan x="10" y="426"> 25.  2017-04-17 11:58:37 +0000    13389 bytes  release-notes.md</tspan>
-<tspan x="10" y="442"> 26.  2017-04-17 11:58:37 +0000       74 bytes  runtime.js</tspan>
+<tspan x="10" y="26">  0.  2017-04-25 03:49:42 +0000   338409 bytes  .</tspan>
+<tspan x="10" y="42">  1.  2017-04-25 03:49:42 +0000     1222 bytes  CONTRIBUTING.md</tspan>
+<tspan x="10" y="58">  2.  2017-04-25 03:49:42 +0000     1572 bytes  LICENSE</tspan>
+<tspan x="10" y="74">  3.  2017-04-25 03:49:42 +0000     8574 bytes  README.md</tspan>
+<tspan x="10" y="90">  4.  2017-04-25 03:49:42 +0000   125290 bytes  dist/diff.js</tspan>
+<tspan x="10" y="106">  5.  2017-04-25 03:49:42 +0000    23926 bytes  dist/diff.min.js</tspan>
+<tspan x="10" y="122">  6.  2017-04-25 03:49:42 +0000     2066 bytes  lib/convert/dmp.js</tspan>
+<tspan x="10" y="138">  7.  2017-04-25 03:49:42 +0000     2835 bytes  lib/convert/xml.js</tspan>
+<tspan x="10" y="154">  8.  2017-04-25 03:49:42 +0000     1746 bytes  lib/diff/array.js</tspan>
+<tspan x="10" y="170">  9.  2017-04-25 03:49:42 +0000    25812 bytes  lib/diff/base.js</tspan>
+<tspan x="10" y="186"> 10.  2017-04-25 03:49:42 +0000     1466 bytes  lib/diff/character.js</tspan>
+<tspan x="10" y="202"> 11.  2017-04-25 03:49:42 +0000     1701 bytes  lib/diff/css.js</tspan>
+<tspan x="10" y="218"> 12.  2017-04-25 03:49:42 +0000    10396 bytes  lib/diff/json.js</tspan>
+<tspan x="10" y="234"> 13.  2017-04-25 03:49:42 +0000     4865 bytes  lib/diff/line.js</tspan>
+<tspan x="10" y="250"> 14.  2017-04-25 03:49:42 +0000     1812 bytes  lib/diff/sentence.js</tspan>
+<tspan x="10" y="266"> 15.  2017-04-25 03:49:42 +0000     7094 bytes  lib/diff/word.js</tspan>
+<tspan x="10" y="282"> 16.  2017-04-25 03:49:42 +0000     7129 bytes  lib/index.js</tspan>
+<tspan x="10" y="298"> 17.  2017-04-25 03:49:42 +0000    16398 bytes  lib/patch/apply.js</tspan>
+<tspan x="10" y="314"> 18.  2017-04-25 03:49:42 +0000    17554 bytes  lib/patch/create.js</tspan>
+<tspan x="10" y="330"> 19.  2017-04-25 03:49:42 +0000    39223 bytes  lib/patch/merge.js</tspan>
+<tspan x="10" y="346"> 20.  2017-04-25 03:49:42 +0000    13474 bytes  lib/patch/parse.js</tspan>
+<tspan x="10" y="362"> 21.  2017-04-25 03:49:42 +0000     1881 bytes  lib/util/array.js</tspan>
+<tspan x="10" y="378"> 22.  2017-04-25 03:49:42 +0000     3968 bytes  lib/util/distance-iterator.js</tspan>
+<tspan x="10" y="394"> 23.  2017-04-25 03:49:42 +0000     1561 bytes  lib/util/params.js</tspan>
+<tspan x="10" y="410"> 24.  2017-04-25 03:49:42 +0000     3381 bytes  package.json</tspan>
+<tspan x="10" y="426"> 25.  2017-04-25 03:49:42 +0000    13389 bytes  release-notes.md</tspan>
+<tspan x="10" y="442"> 26.  2017-04-25 03:49:42 +0000       74 bytes  runtime.js</tspan>
 </text>
 </svg>
