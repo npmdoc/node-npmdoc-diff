@@ -1,4 +1,7 @@
-# api documentation for  [diff (v3.2.0)](https://github.com/kpdecker/jsdiff#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-diff.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-diff) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-diff.svg)](https://travis-ci.org/npmdoc/node-npmdoc-diff)
+# npmdoc-diff
+
+#### basic api documentation for  [diff (v3.2.0)](https://github.com/kpdecker/jsdiff#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-diff.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-diff) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-diff.svg)](https://travis-ci.org/npmdoc/node-npmdoc-diff)
+
 #### A javascript text diff implementation.
 
 [![NPM](https://nodei.co/npm/diff.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/diff)
@@ -98,7 +101,8 @@
     "scripts": {
         "test": "grunt"
     },
-    "version": "3.2.0"
+    "version": "3.2.0",
+    "bin": {}
 }
 ```
 
